@@ -1,0 +1,17 @@
+{
+  "name": "discord-quota-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord dedie au suivi des quotas Codex multi-comptes.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0"
+  }
+}

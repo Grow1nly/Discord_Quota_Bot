@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm start *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Init: Discord Quota Bot pour monitoring multi-comptes *)"
+    ]
+  }
+}

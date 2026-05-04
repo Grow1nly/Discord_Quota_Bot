@@ -13,11 +13,24 @@ class QuotaBot {
     this.lastPayloadJson = null;
     this.refreshTimer = null;
     this.refreshing = false;
+    this.lastUpdateTime = null;
+  }
+
+  formatStatusLine() {
+    const time = this.lastUpdateTime
+      ? new Date(this.lastUpdateTime).toLocaleTimeString('fr-FR')
+      : '--:--:--';
+    return `[QuotaBot] ⏱ ${time} | ${this.refreshing ? '🔄' : '✅'}`;
+  }
+
+  printStatus() {
+    process.stdout.write(`\r${this.formatStatusLine()}`);
   }
 
   async start() {
     this.client.once(Events.ClientReady, async (readyClient) => {
-      console.log(`[Discord_Quota_Bot] Connecte: ${readyClient.user.tag}`);
+      console.log(`[QuotaBot] Connecté: ${readyClient.user.tag}`);
+      this.printStatus();
       await this.refreshNow();
       this.scheduleNextRefresh();
     });
@@ -42,7 +55,7 @@ class QuotaBot {
     this.refreshTimer = setTimeout(() => {
       this.refreshTimer = null;
       this.refreshNow().catch((error) => {
-        console.error('[Discord_Quota_Bot] Echec refresh:', error);
+        console.error(`\n[QuotaBot] ❌ Erreur: ${error.message}`);
         this.scheduleNextRefresh();
       });
     }, this.config.refreshIntervalMs);
@@ -77,9 +90,8 @@ class QuotaBot {
         this.lastPayloadJson = payloadJson;
       }
 
-      console.log(
-        `[Discord_Quota_Bot] Dashboard quota mis a jour. comptes=${snapshot.accounts.length}`
-      );
+      this.lastUpdateTime = new Date().toISOString();
+      this.printStatus();
     } finally {
       this.refreshing = false;
       this.scheduleNextRefresh();

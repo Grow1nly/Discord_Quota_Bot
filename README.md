@@ -1,47 +1,52 @@
 # Discord Quota Bot
 
-Bot Discord dédié au suivi des quotas Codex multi-comptes.
+🤖 Bot Discord dédié au suivi des quotas Codex multi-comptes.
 
-## Objectif
+## ✨ Fonctionnalités
 
-- Aucun suivi cooldown manuel
-- Aucune écriture dans `SwitchCodexApp`
-- Aucune bascule du compte actif source
-- Lecture du quota de chaque compte via `codex app-server`
+- 📊 Lecture du quota de chaque compte via `codex app-server`
+- 🔄 Rafraîchissement automatique
+- 💬 Publication dans un salon Discord
+- 👥 Support multi-comptes sans intervention manuelle
+- 🔒 Aucune écriture dans `SwitchCodexApp`
 
-## Fonctionnement
+## 🚀 Installation
 
-1. Lit `C:\Users\leola\.codex\accounts.json`
-2. Pour chaque compte, copie son `auth.json` dans un home temporaire local au bot
-3. Lance `codex.cmd app-server` avec ce home temporaire
-4. Appelle `account/rateLimits/read`
-5. Publie dans Discord :
-   - Pourcentage de quota restant
-   - Date/heure de reset
-   - Temps restant avant reset
-
-## Variables `.env`
-
-- `DISCORD_TOKEN` (requis - à remplacer par votre propre token)
-- `QUOTA_CHANNEL_ID` (ID du salon Discord pour les messages)
-- `SOURCE_CODEX_HOME` (dossier Codex principal)
-- `REFRESH_INTERVAL_MS` (fréquence de rafraîchissement, défaut: 60000ms)
-- `ACCOUNT_CONCURRENCY` (concorrence de lecture des comptes, défaut: 2)
-
-## Lancement
-
-```powershell
+```bash
+git clone https://github.com/Grow1nly/Discord_Quota_Bot.git
+cd Discord_Quota_Bot
 npm install
+```
+
+## ⚙️ Configuration
+
+### `.env`
+
+```env
+DISCORD_TOKEN=ton_bot_token
+QUOTA_CHANNEL_ID=id_du_salon
+SOURCE_CODEX_HOME=C:\Users\leola\.codex
+REFRESH_INTERVAL_MS=60000
+ACCOUNT_CONCURRENCY=2
+```
+
+### Variables
+
+| Variable | Description | Défaut |
+|----------|-------------|--------|
+| `DISCORD_TOKEN` | Token bot Discord (requis) | - |
+| `QUOTA_CHANNEL_ID` | ID du salon pour les messages | - |
+| `SOURCE_CODEX_HOME` | Dossier Codex principal | `%USERPROFILE%\.codex` |
+| `REFRESH_INTERVAL_MS` | Intervalle de rafraîchissement | 60000ms |
+| `ACCOUNT_CONCURRENCY` | Lectures parallèles | 2 |
+
+## ▶️ Lancement
+
+```bash
 npm start
 ```
 
-## Sécurité
-
-⚠️ **IMPORTANT** : Ne jamais committer le fichier `.env` avec vos tokens réels !
-
-Le fichier `.env` est ignoré par git via `.gitignore`. Créez votre propre fichier `.env` avec vos propres valeurs après le clone.
-
-## Structure
+## 📂 Structure
 
 ```
 src/
@@ -50,15 +55,18 @@ src/
 ├── config.js       # Chargement des variables d'environnement
 ├── codexRpc.js     # Communication avec codex.cmd
 ├── discordView.js  # Construction des messages Discord
-├── format.js       # Formattage des données
+├── format.js       # Formatage des données
 └── stateStore.js   # Stockage de l'état du dashboard
 
 data/runtime/      # Dossiers temporaires (exclus de git)
-
-.env.example        # Modèle de configuration (sans token)
 ```
 
-## Dépendances
+## ⚠️ Sécurité
 
-- discord.js
-- dotenv
+Ne jamais committer le fichier `.env` avec vos tokens réels !
+
+Le fichier `.env` est ignoré par git via `.gitignore`.
+
+## 📝 License
+
+MIT

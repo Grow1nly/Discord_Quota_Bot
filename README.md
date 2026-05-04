@@ -61,12 +61,6 @@ src/
 data/runtime/      # Dossiers temporaires (exclus de git)
 ```
 
-## ⚠️ Sécurité
-
-Ne jamais committer le fichier `.env` avec vos tokens réels !
-
-Le fichier `.env` est ignoré par git via `.gitignore`.
-
 ## 📝 License
 
 MIT

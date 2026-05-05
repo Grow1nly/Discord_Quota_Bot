@@ -25,7 +25,7 @@ npm install
 ```env
 DISCORD_TOKEN=ton_bot_token
 QUOTA_CHANNEL_ID=id_du_salon
-SOURCE_CODEX_HOME=C:\Users\leola\.codex
+SOURCE_CODEX_HOME=C:\Users\"Username"\.codex
 REFRESH_INTERVAL_MS=60000
 ACCOUNT_CONCURRENCY=2
 ```
